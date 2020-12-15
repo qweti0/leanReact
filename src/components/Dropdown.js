@@ -1,24 +1,20 @@
-import React from 'react'
-// import { useState } from 'react';
+import React from "react";
 
-
-function Dropdown(props) {
-    // console.log(props);
-    const options = props.options;
-    // const [open, setOpen]  = useState(0);
-    const name = props.name;
-    const id= props.id;
+const Dropdown = ({ label, name, defaultValue, options, onChange }) => {
     return (
         <div>
-            <label>{name}</label>
-            <select id={id}>
-                {options.map((item) => (
-                    <option key={item.id} value= {item.id}>{item.title}</option>
-                ))}
+            <label>{label}</label>
+            <select name={name} defaultValue={defaultValue} onChange={onChange}>
+                {options
+                    ? options.map((option) => (
+                          <option key={option.id} value={option.id}>
+                              {option.name}
+                          </option>
+                      ))
+                    : null}
             </select>
         </div>
     );
-}
+};
 
-
-export default Dropdown
+export default Dropdown;
