@@ -12,7 +12,6 @@ import {
     useLocation,
 } from "react-router-dom";
 import Login from "./containers/Login";
-
 function App() {
     const [data, setData] = useState({
         owner: "",
@@ -53,21 +52,38 @@ function App() {
     return (
         <div className="App">
             <header>
-                <h1>Đăng ký nghiệp vụ</h1>
+    <h1>Đăng ký nghiệp vụ</h1>
             </header>
             {/* <AuthExample></AuthExample> */}
-            <Switch>
-                <Route path="/login">
-                    <Login />
-                </Route>
-                <Route path="/dangkynv">
-                    <NewForm
-                        onChange={handleChange}
-                        onSubmit={handleSubmit}
-                        data={data}
-                    ></NewForm>
-                </Route>
-            </Switch>
+            <Router>
+            <div>
+                <nav>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/about">About</Link>
+          </li>
+          <li>
+            <Link to="/topics">Topics</Link>
+          </li>
+        </ul>
+        </nav>
+                <Switch>
+                    <Route exact path ="/">
+                        <Login />
+                    </Route>
+                    <Route path="/dangkynv">
+                        <NewForm
+                            onChange={handleChange}
+                            onSubmit={handleSubmit}
+                            data={data}
+                        ></NewForm>
+                    </Route>
+                </Switch>
+            </div>
+            </Router>
         </div>
     );
 }

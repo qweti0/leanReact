@@ -7,18 +7,12 @@ import { useState, useEffect } from "react";
 
 function NewForm(props) {
     const nationOptions = [
-        { id: 0, title: "VN" },
-        { id: 1, title: "VN" },
+        { id: 0, title: "Việt Nam" }
     ];
+    const [cityConvertOptions, setCityConvertOptions] =useState([]);
     const { onChange, onSubmit, data } = props;
     function handleClearInput(event) {}
-    const [cityOptions, setCityOptions] = useState([
-        {
-            province_id: "92",
-            province_name: "Thành phố Hà Nội",
-            province_type: "Thành phố Trung ương",
-        },
-    ]);
+    const [cityOptions, setCityOptions] = useState([{province_id:"",province_name:""}]);
     const [districtOptions, setDistrictOptions] = useState([]);
     const [roadOptions, setRoadOptions] = useState([]);
     const [issueByOptions, setIssueByOptions] = useState([]);
@@ -27,10 +21,16 @@ function NewForm(props) {
         fetch("https://vapi.vnappmob.com//api/province")
             .then(async (response) => {
                 const data = await response.json();
-                setCityOptions(data);
+                setCityOptions(data.results);
             })
             .catch((error) => {});
     }, []);
+    useEffect(() => {
+        setCityConvertOptions(cityOptions.map(city =>{
+            return {"id": city.province_id,
+            "title": city.province_name}
+        }))
+    }, [cityOptions]);
 
     return (
         <div>
@@ -54,9 +54,9 @@ function NewForm(props) {
                     label="Tỉnh thành phố "
                     name="city"
                     id="city"
-                    options={nationOptions}
+                    options={cityConvertOptions}
                     onChange={onChange}
-                ></Dropdown>
+                />
                 <br></br>
                 <Dropdown
                     name="Quận huyện "
