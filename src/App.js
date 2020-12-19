@@ -12,6 +12,7 @@ import {
     useLocation,
 } from "react-router-dom";
 import Login from "./containers/Login";
+import AntForm from "./containers/AntForm";
 function App() {
     const [data, setData] = useState({
         owner: "",
@@ -75,11 +76,12 @@ function App() {
                         <Login />
                     </Route>
                     <Route path="/dangkynv">
-                        <NewForm
+                        {/* <NewForm
                             onChange={handleChange}
                             onSubmit={handleSubmit}
                             data={data}
-                        ></NewForm>
+                        ></NewForm> */}
+                        <AntForm />
                     </Route>
                 </Switch>
             </div>
